@@ -167,6 +167,7 @@ class PageController extends BaseController {
 		require_once APP_PATH.'/../Text/Diff.php';
 		require_once APP_PATH.'/../Text/Diff/Renderer.php';
 		require_once APP_PATH.'/../Text/Diff/Renderer/inline.php';
+		import("Vendor.Parsedown.Parsedown");
 		
 		$page_id = I("page_id");
         $hostory_id = I("hostory_id");
