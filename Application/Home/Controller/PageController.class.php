@@ -171,6 +171,7 @@ class PageController extends BaseController {
 		
 		$page_id = I("page_id");
         $history_id = I("page_history_id");
+		$show_html = I("show_html");
 		
 		$page = D("Page")->where(" page_id = '$page_id' ")->find();
 		$history = D("PageHistory")->where(" page_history_id = '$history_id' ")->find();;
@@ -184,9 +185,11 @@ class PageController extends BaseController {
 		if(is_string($lines2))
 			$lines2 = explode("\n",$lines2);
 		
-		$diff = new \Text_Diff('auto', array($lines1, $lines2));
+		$diff = new \Text_Diff('auto', array($lines2, $lines1));
 		$renderer = new \Text_Diff_Renderer_inline();
 		$diffResutl = $renderer->render($diff);
+		
+		$show_html && $diffResutl = htmlspecialchars_decode($diffResutl);
 		
 		$this->assign("diffResutl" , $diffResutl);
 		$this->assign("page_id" , $page_id);
