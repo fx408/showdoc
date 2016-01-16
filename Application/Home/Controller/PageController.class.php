@@ -167,7 +167,6 @@ class PageController extends BaseController {
 		require_once APP_PATH.'/../Text/Diff.php';
 		require_once APP_PATH.'/../Text/Diff/Renderer.php';
 		require_once APP_PATH.'/../Text/Diff/Renderer/inline.php';
-		import("Vendor.Parsedown.Parsedown");
 		
 		$page_id = I("page_id");
         $history_id = I("page_history_id");
@@ -176,29 +175,15 @@ class PageController extends BaseController {
 		$page = D("Page")->where(" page_id = '$page_id' ")->find();
 		$history = D("PageHistory")->where(" page_history_id = '$history_id' ")->find();;
 		
-		$Parsedown = new \Parsedown();
-		$lines1 = $Parsedown->text(htmlspecialchars_decode($page['page_content']));
-		$lines2 = $Parsedown->text(htmlspecialchars_decode($history['page_content']));
+		$lines1 = htmlspecialchars_decode($page['page_content']);
+		$lines2 = htmlspecialchars_decode($history['page_content']);
 		
-		if(is_string($lines1))
-			$lines1 = explode("\n",$lines1);
-		if(is_string($lines2))
-			$lines2 = explode("\n",$lines2);
-		
+		is_string($lines1) && $lines1 = explode("\n", $lines1);
+		is_string($lines2) && $lines2 = explode("\n", $lines2);
+
 		$diff = new \Text_Diff('auto', array($lines2, $lines1));
 		$renderer = new \Text_Diff_Renderer_inline();
 		$diffResutl = $renderer->render($diff);
-		
-		switch($diff_type) {
-			case 'text': 
-				$diffResutl = strip_tags($diffResutl);
-				break;
-			case 'html':
-				$diffResutl = htmlspecialchars_decode($diffResutl);
-				break;
-			default:
-				break;
-		}
 		
 		$this->assign("diffResutl" , $diffResutl);
 		$this->assign("page_id" , $page_id);
