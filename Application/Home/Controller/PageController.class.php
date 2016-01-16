@@ -184,7 +184,7 @@ class PageController extends BaseController {
 			$lines2=explode("\n",$lines2);
 		$diff = new Text_Diff('auto', array($lines1, $lines2));
 		$renderer = new Text_Diff_Renderer_inline();
-		$diffResutl $renderer->render($diff);
+		$diffResutl = $renderer->render($diff);
 		
 		$this->assign("diffResutl" , $diffResutl);
         $this->display();
