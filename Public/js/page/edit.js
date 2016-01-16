@@ -54,6 +54,26 @@ $(function() {
       var tmpl = $("#database-doc-templ").html();
       editormd.insertValue(tmpl);
   });
+  /*插入数据字典模板*/
+  $("#api-get-doc").click(function(){
+      var apiAddress = $("input[name=api-address]").val();
+	  $.get(
+        "Home/api/getData",
+        { "address": apiAddress },
+        function(data) {
+			if(data.error_code == 0) {
+				var contents = "**参数：** \n\n|参数名|类型|必选|说明|\n|:----    |:---|:----- |-----   |\n";
+				contents += data.params+"\n\n";
+				
+				contents += " **返回参数说明** \n\n|参数名|类型|说明|\n|:-----  |:-----|-----   \n";
+				contents += data.response+"\n\n";
+				
+				editormd.insertValue(contents);
+			}
+        },
+        "json"
+	  );
+  });
   
   /*保存*/
   $("#save").click(function(){

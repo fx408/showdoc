@@ -2,10 +2,10 @@
 return array(
 	//'配置项'=>'配置值'
 	'DB_TYPE'   => 'mysql', // 数据库类型
-	'DB_HOST'   => 'localhost',
+	'DB_HOST'   => '10.72.5.14',
 	'DB_NAME'   => 'showdoc', 
-	'DB_USER'   => 'showdoc', 
-	'DB_PWD'    => 'showdoc123456',
+	'DB_USER'   => 'tester', 
+	'DB_PWD'    => 'test123',
 	'DB_PORT'   => 3306, // 端口
 	'DB_PREFIX' => '', // 数据库表前缀
 	'DB_CHARSET'=> 'utf8', // 字符集
