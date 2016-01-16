@@ -168,14 +168,14 @@ class PageController extends BaseController {
 		require_once __ROOT__.'/Text/Diff/Renderer.php';
 		require_once __ROOT__.'/Text/Diff/Renderer/inline.php';
 		
-		$item_id = I("item_id");
+		$page_id = I("page_id");
         $hostory_id = I("hostory_id");
 		
-		$item = D("Page")->where(" page_id = '$page_id' ")->find();
+		$page = D("Page")->where(" page_id = '$page_id' ")->find();
 		$hostory = D("Page_history")->where(" page_history_id = '$history_id' ")->find();;
 		
 		$Parsedown = new \Parsedown();
-		$lines1 = $Parsedown->text(htmlspecialchars_decode($item['page_content']));
+		$lines1 = $Parsedown->text(htmlspecialchars_decode($page['page_content']));
 		$lines2 = $Parsedown->text(htmlspecialchars_decode($hostory['page_content']));
 		
 		if(is_string($lines1))
