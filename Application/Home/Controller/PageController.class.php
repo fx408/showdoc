@@ -189,6 +189,8 @@ class PageController extends BaseController {
 		$diffResutl = $renderer->render($diff);
 		
 		$this->assign("diffResutl" , $diffResutl);
+		$this->assign("page_id" , $page_id);
+		$this->assign("page_history_id" , $history_id);
         $this->display();
 	}
 
