@@ -41,7 +41,11 @@ $(function(){
 	$('#edit-cat').modal();
    
 	$(".exist-cat").click(function() {
-		history.go(-1);
+		if(window.history.length > 1) {
+			history.go(-1);
+		} else {
+			window.location.href = '/Home/page/edit?page_id={$page_id}';
+		}
 	});
 })
 </script>
