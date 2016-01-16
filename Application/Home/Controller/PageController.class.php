@@ -170,14 +170,14 @@ class PageController extends BaseController {
 		import("Vendor.Parsedown.Parsedown");
 		
 		$page_id = I("page_id");
-        $hostory_id = I("hostory_id");
+        $history_id = I("page_history_id");
 		
 		$page = D("Page")->where(" page_id = '$page_id' ")->find();
-		$hostory = D("PageHistory")->where(" page_history_id = '$history_id' ")->find();;
+		$history = D("PageHistory")->where(" page_history_id = '$history_id' ")->find();;
 		
 		$Parsedown = new \Parsedown();
 		$lines1 = $Parsedown->text(htmlspecialchars_decode($page['page_content']));
-		$lines2 = $Parsedown->text(htmlspecialchars_decode($hostory['page_content']));
+		$lines2 = $Parsedown->text(htmlspecialchars_decode($history['page_content']));
 		
 		if(is_string($lines1))
 			$lines1 = explode("\n",$lines1);

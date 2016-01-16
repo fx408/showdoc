@@ -2,27 +2,11 @@
 <link rel="stylesheet" href="__PUBLIC__/css/page/edit.css" />
 <link rel="stylesheet" href="__PUBLIC__/editor.md/css/editormd.css" />
 <style type="text/css">
-.btn-primary {
-    background-color: #006dcc;
+.del {
+    color: #FB2828;
 }
-
-.btn-primary:hover {
-    background-color: #04c;
-}
-
-#page_title,
-#cat_id,
-#order {
-    height: 30px;
-}
-
-#cat_id {
-    width: 150px;
-}
-
-#order {
-    width: 120px;
-    margin-right: 20px;
+.ins {
+	color: #058C05;
 }
 </style>
 <div id="layout">
@@ -31,6 +15,7 @@
         <div class="head-left  pull-left">
             <ul class="inline">
                 <li>
+					<a href="edit?page_id={$page_id}&page_history_id={$value.page_history_id}">恢复到此版本</a>
                     <!-- 首次添加没有历史版本，不显示 -->
                     <if condition="$page.page_id gt 0">
                         <a href="history?page_id={$page.page_id}">历史版本</a>
@@ -42,9 +27,9 @@
     </header>
     <br>
 
-    <div id="editormd">
+    <pre id="editormd">
         {$diffResutl}
-    </div>
+    </pre>
 </div>
 
 <include file="Common/footer" />

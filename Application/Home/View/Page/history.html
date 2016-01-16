@@ -20,9 +20,11 @@
       <TR>
         <td>{$value.addtime}</td>
         <td>{$value.author_username}</td>
-        <td><a href="edit?page_id={$page_id}&page_history_id={$value.page_history_id}">恢复到此版本</a></td>
+        <td>
+			<a href="edit?page_id={$page_id}&page_history_id={$value.page_history_id}">恢复</a>
+			<a href="compare?page_id={$page_id}&page_history_id={$value.page_history_id}">对比</a>
+		</td>
       </TR>
-
       </foreach>
     </if>
   </table>
