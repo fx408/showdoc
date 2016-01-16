@@ -164,9 +164,9 @@ class PageController extends BaseController {
 	
 	// 版本比较
 	public function compare() {
-		require_once __ROOT__.'/Text/Diff.php';
-		require_once __ROOT__.'/Text/Diff/Renderer.php';
-		require_once __ROOT__.'/Text/Diff/Renderer/inline.php';
+		require_once APP_PATH.'/../Text/Diff.php';
+		require_once APP_PATH.'/../Text/Diff/Renderer.php';
+		require_once APP_PATH.'/../Text/Diff/Renderer/inline.php';
 		
 		$page_id = I("page_id");
         $hostory_id = I("hostory_id");
