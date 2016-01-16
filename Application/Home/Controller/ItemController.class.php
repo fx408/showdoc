@@ -57,6 +57,8 @@ class ItemController extends BaseController {
         $this->checkLogin(false);
         $item_id = I("item_id");
         $keyword = I("keyword");
+		$page_id = I("page_id");
+		
         $login_user = session("login_user");
         $uid = $login_user['uid'] ? $login_user['uid'] : 0 ;
             
@@ -99,6 +101,7 @@ class ItemController extends BaseController {
         $this->assign("pages" , $pages);
         $this->assign("item" , $item);
         $this->assign("login_user" , $login_user);
+		$this->assign("page_id" , $page_id);
     	$this->display();
     }
 
