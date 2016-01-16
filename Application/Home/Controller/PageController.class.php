@@ -159,10 +159,36 @@ class PageController extends BaseController {
         }
 
         $this->assign("PageHistory" , $PageHistory);
-
-        $this->display();        
-
+        $this->display();
     }
+	
+	// 版本比较
+	public function compare() {
+		require_once __ROOT__.'/Text/Diff.php';
+		require_once __ROOT__.'/Text/Diff/Renderer.php';
+		require_once __ROOT__.'/Text/Diff/Renderer/inline.php';
+		
+		$item_id = I("item_id");
+        $hostory_id = I("hostory_id");
+		
+		$item = D("Page")->where(" page_id = '$page_id' ")->find();
+		$hostory = D("Page_history")->where(" page_history_id = '$history_id' ")->find();;
+		
+		$Parsedown = new \Parsedown();
+		$lines1 = $Parsedown->text(htmlspecialchars_decode($item['page_content']));
+		$lines2 = $Parsedown->text(htmlspecialchars_decode($hostory['page_content']));
+		
+		if(is_string($lines1))
+			$lines1=explode("\n",$lines1);
+		if(is_string($lines2))
+			$lines2=explode("\n",$lines2);
+		$diff = new Text_Diff('auto', array($lines1, $lines2));
+		$renderer = new Text_Diff_Renderer_inline();
+		$diffResutl $renderer->render($diff);
+		
+		$this->assign("diffResutl" , $diffResutl);
+        $this->display();
+	}
 
     //上传图片
     public function uploadImg(){
