@@ -2,11 +2,16 @@
 <link rel="stylesheet" href="__PUBLIC__/css/page/edit.css" />
 <link rel="stylesheet" href="__PUBLIC__/editor.md/css/editormd.css" />
 <style type="text/css">
-.del {
+.compare-box del {
     color: #FB2828;
 }
-.ins {
+.compare-box ins {
 	color: #058C05;
+}
+
+.compare-box {
+	width: 90%;
+    margin: 0 auto;
 }
 </style>
 <div id="layout">
@@ -16,18 +21,14 @@
             <ul class="inline">
                 <li>
 					<a href="edit?page_id={$page_id}&page_history_id={$value.page_history_id}">恢复到此版本</a>
-                    <!-- 首次添加没有历史版本，不显示 -->
-                    <if condition="$page.page_id gt 0">
-                        <a href="history?page_id={$page.page_id}">历史版本</a>
-                        <else />
-                    </if>
+					<a href="history?page_id={$page.page_id}">历史版本</a>
                 </li>
             </ul>
         </div>
     </header>
     <br>
 
-    <pre id="editormd">
+    <pre class="compare-box">
         {$diffResutl}
     </pre>
 </div>
