@@ -194,6 +194,7 @@ class PageController extends BaseController {
 		$this->assign("diffResutl" , $diffResutl);
 		$this->assign("page_id" , $page_id);
 		$this->assign("page_history_id" , $history_id);
+		$this->assign("show_html" , $show_html);
         $this->display();
 	}
 
