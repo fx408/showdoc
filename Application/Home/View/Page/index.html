@@ -8,6 +8,7 @@ body{
 }
 pre{
     display: block;
+	height:22px;
     overflow: hidden;
 }
 
@@ -47,10 +48,16 @@ $(function(){
 		return false;
 	});
 	
+	var bodyHeight = $("body").height();
+	
 	$("pre").each(function() {
 		var h = $(this).height();
 		$(this).prepend('<a href="javascript:;" class="pack">-</a>');
+		
+		bodyHeight += $(this).find("code").height()*1 + 40;
 	});
+
+	$("body").height(bodyHeight+"px");
 	
 	$("pre a.open, pre a.pack").click(function() {
 		var c = $(this).attr("class");
