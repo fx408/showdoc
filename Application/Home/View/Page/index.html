@@ -12,15 +12,20 @@ pre{
     overflow: hidden;
 }
 
-pre a.open, pre a.close{
+pre a.open, pre a.pack{
 	position: absolute;
     right: 18px;
     display: block;
     background-color: #FFF;
     border-radius: 3px;
-    padding: 1px 5px;
+	width:20px;
+	line-height:20px;
     text-decoration: none;
-    box-shadow: 0 0 7px #bbb;	
+    box-shadow: 0 0 5px #CCC;
+	font-size: 14px;
+    font-family: Microsoft YaHei;
+    opacity: 0.8;
+	text-align:center;
 }
 </style>
 <!-- 这里开始是内容 -->
@@ -45,12 +50,12 @@ $(function(){
 	
 	$("pre").each(function() {
 		var h = $(this).height();
-		$(this).prepend('<a href="javascript:;" class="open">展开</a>');
+		$(this).prepend('<a href="javascript:;" class="open">+</a>');
 	});
 	
 	$("pre a.open, pre a.pack").click(function() {
 		var c = $(this).attr("class");
-		$(this).html(c == 'open' ? '收起' : '展开');
+		$(this).html(c == 'open' ? '-' : '+');
 		$(this).removeClass().addClass(c == 'open' ? 'pack' : 'open');
 		
 		var h = c == 'open' ? $(this).siblings("code").height()*1 + 40 : 22;
