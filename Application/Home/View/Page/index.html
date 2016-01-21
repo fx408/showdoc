@@ -6,6 +6,22 @@
 body{
 	overflow-x:hidden;overflow-y:hidden
 }
+pre{
+    display: block;
+    height: 22px;
+    overflow: hidden;
+}
+
+pre a.open, pre a.close{
+	position: absolute;
+    right: 18px;
+    display: block;
+    background-color: #FFF;
+    border-radius: 3px;
+    padding: 1px 5px;
+    text-decoration: none;
+    box-shadow: 0 0 7px #bbb;	
+}
 </style>
 <!-- 这里开始是内容 -->
 <div class="" style="padding-top:10px;">
@@ -13,11 +29,7 @@ body{
 {$page.page_content}
 
 </div>
-
-
-
-
- <include file="Common/footer" />
+<include file="Common/footer" />
 <script>
 
 $(function(){
@@ -29,6 +41,21 @@ $(function(){
 	$('a[href^="http"], a[href^="/"]').click(function() {
 		window.top.location.href = $(this).attr("href");
 		return false;
+	});
+	
+	$("pre").each(function() {
+		var h = $(this).height();
+		$(this).prepend('<a href="javascript:;" class="open">展开</a>');
+	});
+	
+	$("pre a.open, pre a.pack").click(function() {
+		var c = $(this).attr("class");
+		$(this).html(c == 'open' ? '收起' : '展开');
+		$(this).removeClass().addClass(c == 'open' ? 'pack' : 'open');
+		
+		var h = c == 'open' ? $(this).siblings("code").height()*1 + 40 : 22;
+		
+		$(this).parent().animate({height:h+"px"});
 	});
 })
 </script>
