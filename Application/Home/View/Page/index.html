@@ -62,16 +62,14 @@ $(function(){
 	});
 	
 	$("pre").each(function() {
-		var codeHeight = $(this).find("code").height()*1;
-		
-		if(codeHeight < 320) {
+		$(this).prepend('<a href="javascript:;" class="open">+</a>');
+		bodyHeight += $(this).find("code").height()*1 + 15;
+	});
+	
+	$("pre").each(function() {
+		if( $(this).find("code").height()*1 < 320 ) {
 			$(this).find("a.open").click();
 		}
-		
-		var h = $(this).height();
-		$(this).prepend('<a href="javascript:;" class="open">+</a>');
-		
-		bodyHeight += codeHeight + 15;
 	});
 	
 	$("body").height(bodyHeight+"px");
