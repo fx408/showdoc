@@ -51,9 +51,7 @@ $(function(){
 	
 	var bodyHeight = $("body").height();
 	
-	$("body").height(bodyHeight+"px");
-	
-	$("pre a.open, pre a.pack").click(function() {
+	$(document).on("click", "pre a.open, pre a.pack", function() {
 		var c = $(this).attr("class");
 		$(this).html(c == 'open' ? '-' : '+');
 		$(this).removeClass().addClass(c == 'open' ? 'pack' : 'open');
@@ -75,5 +73,8 @@ $(function(){
 		
 		bodyHeight += codeHeight + 15;
 	});
+	
+	$("body").height(bodyHeight+"px");
+	
 })
 </script>
