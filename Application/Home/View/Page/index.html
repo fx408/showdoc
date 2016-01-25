@@ -7,25 +7,26 @@ body{
 	overflow-x:hidden;overflow-y:hidden
 }
 pre{
-    display: block;
+	display: block;
 	height:22px;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 pre a.open, pre a.pack{
 	position: absolute;
-    right: 18px;
-    display: block;
-    background-color: #FFF;
-    border-radius: 3px;
+	right: 18px;
+	display: block;
+	background-color: #FFF;
+	border-radius: 3px;
 	width:20px;
 	line-height:20px;
-    text-decoration: none;
-    box-shadow: 0 0 5px #CCC;
+	text-decoration: none;
+	box-shadow: 0 0 5px #CCC;
 	font-size: 14px;
-    font-family: Microsoft YaHei;
-    opacity: 0.8;
+	font-family: Microsoft YaHei;
+	opacity: 0.8;
 	text-align:center;
+	border:1px solid #7CCBFF;
 }
 </style>
 <!-- 这里开始是内容 -->
@@ -50,13 +51,6 @@ $(function(){
 	
 	var bodyHeight = $("body").height();
 	
-	$("pre").each(function() {
-		var h = $(this).height();
-		$(this).prepend('<a href="javascript:;" class="open">+</a>');
-		
-		bodyHeight += $(this).find("code").height()*1 + 40;
-	});
-
 	$("body").height(bodyHeight+"px");
 	
 	$("pre a.open, pre a.pack").click(function() {
@@ -64,9 +58,22 @@ $(function(){
 		$(this).html(c == 'open' ? '-' : '+');
 		$(this).removeClass().addClass(c == 'open' ? 'pack' : 'open');
 		
-		var h = c == 'open' ? $(this).siblings("code").height()*1 + 40 : 22;
+		var h = c == 'open' ? $(this).siblings("code").height()*1 + 15 : 22;
 		
 		$(this).parent().animate({height:h+"px"});
+	});
+	
+	$("pre").each(function() {
+		var codeHeight = $(this).find("code").height()*1;
+		
+		if(codeHeight < 320) {
+			$("pre a.open").click();
+		}
+		
+		var h = $(this).height();
+		$(this).prepend('<a href="javascript:;" class="open">+</a>');
+		
+		bodyHeight += codeHeight + 15;
 	});
 })
 </script>
