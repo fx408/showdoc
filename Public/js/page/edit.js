@@ -60,8 +60,10 @@ $(function() {
 	  $.get(
         "/Home/api/getData",
         { "address": apiAddress },
-        function(data) {
-			if(data.error_code == 0) {
+        function(result) {
+			if(result.error_code == 0) {
+				var data = result.data;
+				
 				var contents = "**参数：** \n\n|参数名|类型|必选|说明|\n|:----    |:---|:----- |-----   |\n";
 				contents += data.params+"\n\n";
 				

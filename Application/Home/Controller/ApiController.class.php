@@ -18,8 +18,7 @@ class ApiController extends BaseController {
 		$result = curl_exec($ch);
 		$result && $result = @ json_decode($result, true);
         
-		$return = array('error_message'=>'');
-
+		$return = array();
 		if ($result) {
 			$return['params'] = $this->getParams($address);
 			$return['response'] = $this->getReponse($result);
