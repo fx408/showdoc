@@ -58,7 +58,7 @@ $(function() {
   $("#api-get-doc").click(function(){
       var apiAddress = $("input[name=api-address]").val();
 	  $.get(
-        "Home/api/getData",
+        "/Home/api/getData",
         { "address": apiAddress },
         function(data) {
 			if(data.error_code == 0) {
