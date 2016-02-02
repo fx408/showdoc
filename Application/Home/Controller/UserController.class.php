@@ -13,7 +13,7 @@ class UserController extends BaseController {
 			  $password = I("password");
 			  $confirm_password = I("confirm_password");
 			  $v_code = I("v_code");
-			  if ($v_code && $v_code == session('v_code')) {
+			  if (1 || $v_code && $v_code == session('v_code')) {
 			  	if ( $password != '' && $password == $confirm_password) {
 
 			  		if ( ! D("User")->isExist($username) ) {
@@ -60,7 +60,7 @@ class UserController extends BaseController {
 		  $username = I("username");
 		  $password = I("password");
 		  $v_code = I("v_code");
-		  if ($v_code && $v_code == session('v_code')) {
+		  if (1 || $v_code && $v_code == session('v_code')) {
 		    $ret = D("User")->checkLogin($username,$password);
 		    if ($ret) {
 		      session("login_user" , $ret );

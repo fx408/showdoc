@@ -147,7 +147,7 @@ class Think {
      */
     public static function autoload($class) {
         // 检查是否存在映射
-        if(isset(self::$_map[$class])) {
+        if(isset(self::$_map) && isset(self::$_map[$class])) {
             include self::$_map[$class];
         }elseif(false !== strpos($class,'\\')){
           $name           =   strstr($class, '\\', true);
