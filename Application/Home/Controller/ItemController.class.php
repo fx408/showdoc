@@ -229,7 +229,36 @@ class ItemController extends BaseController {
             }
         }
 
-        output_word($data,$item['item_name']);
+        $this->outputWord($data,$item['item_name']);
     }
+    
+	protected function outputWord($data, $fileName='document') {
+		if(empty($data)) return '';
+    
+    $data = '
+        <html xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta http-equiv=Content-Type content="text/html;  
+        charset=utf-8">
+        <meta name=ProgId content=Word.Document>
+        <meta name=Generator content="Microsoft Word 11">
+        <meta name=Originator content="Microsoft Word 11">
+        <xml><w:WordDocument><w:View>Print</w:View></xml></head>
+        <body>'.$data.'</body></html>';
+    $len = strlen($data);
+    header("Content-type: application/octet-stream");
+    header("Content-Disposition: attachment; filename={$fileName}.doc");
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename='.$fileName.'.doc');
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . $len);
+   echo $data;
+	}
 
 }
