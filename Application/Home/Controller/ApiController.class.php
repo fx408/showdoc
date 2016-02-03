@@ -2,33 +2,33 @@
 namespace Home\Controller;
 use Think\Controller;
 class ApiController extends BaseController {
-	protected $paramsTemplate = '|%s|%s|%s|--';
-	protected $responseTemplate = '|%s|%s|--';
-	
+	protected $paramsTemplate = '|%s|%s|%s|-';
+	protected $responseTemplate = '|%s|%s|-';
 	
 	protected $lineTemplate = '';
-    //获取接口数据
-    public function getData() {
-        $address = I("address");
-		//$address = 'http://api.itv.cntv.cn/list/get?type=&page=&limit=1';
+	//获取接口数据
+	public function getData() {
+		$address = @ $_GET["address"];
 		
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $address);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-		$result = curl_exec($ch);
-		$result && $result = @ json_decode($result, true);
-        
+		if($address) {
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $address);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+			$result = curl_exec($ch);
+			$result && $result = @ json_decode($result, true);
+		}
+		
 		$return = array();
-		if ($result) {
+		if(@ $result) {
 			$return['params'] = $this->getParams($address);
 			$return['response'] = $this->getReponse($result);
 			$this->sendResult($return);
-        }else{
-            $return['error_code'] = 10103 ;
-            $return['error_message'] = 'request  fail' ;
-            $this->sendResult($return);
-        }
-    }
+		}else{
+			$return['error_code'] = 10103 ;
+			$return['error_message'] = 'request  fail' ;
+			$this->sendResult($return);
+		}
+	}
 	
 	protected function getParams($address) {
 		$this->lineTemplate = $this->paramsTemplate;
@@ -44,7 +44,28 @@ class ApiController extends BaseController {
 	
 	protected function getReponse($data) {
 		$this->lineTemplate = $this->responseTemplate;
-		$lines = $this->mkLinks($data);
+		
+		if(isset($data['data']) && is_array($data['data'])) {
+			$innerData = $data['data'];
+			$data['data'] = array();
+			
+			$lines = $this->mkLinks($data);
+			
+			foreach($innerData as $key=>$item) {
+				$arrKeys = array_keys($item);
+				$newItem = $arrKeys[0] === 0 ? $item[0] : $item;
+				
+				$lines[] = "\n**返回值(data.{$key})说明**\n";
+				$lines[] = "|参数名|类型|说明|";
+				$lines[] = "|:-----  |:-----|-----";
+				
+				$lines = array_merge($lines, $this->mkLinks($newItem));
+			}
+			
+		} else {
+			$lines = $this->mkLinks($data);
+		}
+		
 		return implode("\n", $lines);
 	}
 	
@@ -73,5 +94,3 @@ class ApiController extends BaseController {
 		return $res;
 	}
 }
-
-//http://doc.qr.cntv.cn/index.php/Home/api/getData?address=http%3A%2F%2Fapi.itv.cntv.cn%2Flist%2Fget%3Ftype%3D%26page%3D%26limit%3D

@@ -67,7 +67,7 @@ $(function() {
 				var contents = "**参数：** \n\n|参数名|类型|必选|说明|\n|:----    |:---|:----- |-----   |\n";
 				contents += data.params+"\n\n";
 				
-				contents += " **返回参数说明** \n\n|参数名|类型|说明|\n|:-----  |:-----|-----   \n";
+				contents += " **返回值说明** \n\n|参数名|类型|说明|\n|:-----  |:-----|-----   \n";
 				contents += data.response+"\n\n";
 				
 				editormd.insertValue(contents);
