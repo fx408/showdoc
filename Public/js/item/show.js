@@ -95,10 +95,10 @@ $(function(){
       //如果子菜单是隐藏的，则显示之；如果是显示状态的，则隐藏
       if ($(this).children('.child-ul').css("display") == "none") {
         $(this).children('.child-ul').show();
-        $(this).children("a").children('i').attr("class","icon-chevron-down");
+        $(this).children("a").children('i').attr("class","icon-folder-open");
       }else{
         $(this).children('.child-ul').hide();
-        $(this).children("a").children('i').attr("class","icon-chevron-right");
+        $(this).children("a").children('i').attr("class","icon-folder-close");
       }
     };
     //获取对应的page_id
