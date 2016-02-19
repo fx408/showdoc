@@ -79,7 +79,7 @@ $(function() {
   
   /*解析sql语句*/
   $("#parse-sql").click(function() {
-  	var sqlStr = $("input[name=create-sql]").val();
+  	var sqlStr = $("textarea[name=create-sql]").val();
   	var sql = sqlStr.split("\n");
 		var reg = /^`/;
 		
