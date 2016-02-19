@@ -77,6 +77,47 @@ $(function() {
 	  );
   });
   
+  /*解析sql语句*/
+  $("#parse-sql").click(function() {
+  	var sqlStr = $("input[name=create-sql]").val();
+  	var sql = sqlStr.split("\n");
+		var reg = /^`/;
+		
+		var res = [];
+		
+		res.push("- 是否分表：**是**\n");
+		res.push('|字段|类型|空|默认|注释|');
+		res.push('|:----    |:-------    |:--- |-- -|------      |');
+		
+		for(var i = 0; i < sql.length; i++) {
+			var line = $.trim( sql[i] );
+			var d = [' ', ' ', ' ', ' ', ' '];
+			
+			if(reg.test(line)) {
+				var items = line.split(/\s+/);
+				
+				d[0] = items[0].replace(/`/g, "");
+				d[1] = items[1];
+				d[2] = line.indexOf("NOT NULL") == -1 ? '否' : '是';
+				
+				if(line.indexOf("DEFAULT") != -1)
+					d[3] = line.match(/DEFAULT\s+(.*?)(?:\s|,)/)[1];
+				
+				if(line.indexOf("#") != -1)
+					d[4] = line.split("#")[1];
+				
+				res.push('|' + d.join('|'));
+			}
+		}
+		
+		res.push("\n**数据表结构**\n");
+		res.push("```SQL");
+		res.push(sqlStr);
+		res.push("```");
+  	
+  	editormd.insertValue(res.join("\n"));
+  });
+  
   /*保存*/
   $("#save").click(function(){
     var page_id = $("#page_id").val();
@@ -104,14 +145,3 @@ $(function() {
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
