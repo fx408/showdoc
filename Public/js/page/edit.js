@@ -85,6 +85,7 @@ $(function() {
 		
 		var res = [];
 		
+		res.push("****\n");
 		res.push("- 表名：\n");
 		res.push("- 是否分表：**是**\n");
 		res.push('|字段|类型|空|默认|注释|');
