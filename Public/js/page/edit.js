@@ -85,6 +85,7 @@ $(function() {
 		
 		var res = [];
 		
+		res.push("- 表名：\n");
 		res.push("- 是否分表：**是**\n");
 		res.push('|字段|类型|空|默认|注释|');
 		res.push('|:----    |:-------    |:--- |-- -|------      |');
@@ -106,7 +107,7 @@ $(function() {
 				if(line.indexOf("#") != -1)
 					d[4] = line.split("#")[1];
 				
-				res.push('|' + d.join('|'));
+				res.push('|' + d.join('|') + '|');
 			}
 		}
 		
