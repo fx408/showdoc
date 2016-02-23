@@ -20,7 +20,7 @@ $(function(){
         //如果该菜单是子菜单，则还需要把父菜单打开才行
         if ($(this).parent('.child-ul')) {
             $(this).parent('.child-ul').show();
-            $(this).parent('.child-ul').parent('li').children("a").children('i').attr("class","icon-chevron-down");
+            $(this).parent('.child-ul').parent('li').children("a").children('i').attr("class","icon-folder-open");
         };
         //获取对应的page_id
           page_id = $(this).children("a").attr("data-page-id");
